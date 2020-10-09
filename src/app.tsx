@@ -11,12 +11,14 @@ const Sections = React.lazy(() =>
 
 import "./style/app.less";
 function App() {
-    const { error } = React.useContext(NoteContext);
+    const connect = React.useContext(NoteContext);
+    const items = connect("items");
+
     console.log("------------------------------------");
     console.log("#Rending the app");
     return (
         <div id="app">
-            {error && AlertError({ msg: "unable to fetch server for notes" })}
+            {/* {error && AlertError({ msg: "unable to fetch server for notes" })} */}
             <Add />
 
             <Router>

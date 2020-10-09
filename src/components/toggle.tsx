@@ -9,7 +9,11 @@ type Props = {
 
 const Toggle = ({ id, isDone }: Props) => {
     const [done, setDone] = React.useState<Boolean>(isDone);
-    const { update } = React.useContext(NoteContext);
+    
+
+    const connect = React.useContext(NoteContext);
+    const update = connect("update");
+
     return (
         <button className={"checkBox"} onClick={() => {
             setDone(!done);

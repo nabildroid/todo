@@ -10,7 +10,8 @@ function Add() {
     const [paragraph, setParagraph] = React.useState("");
     const [error, setError] = React.useState<boolean>(false);
 
-    const { add } = React.useContext(NoteContext);
+    const connect = React.useContext(NoteContext);
+    const add = connect("add");
 
     console.log("#Rendering add new Note");
     const validate = () => {

@@ -13,7 +13,8 @@ type Props = {
 
 function Section({ name, filter }: Props) {
 
-    const { items } = React.useContext(NoteContext);
+    const connect = React.useContext(NoteContext);
+    const items = connect("items");
     const filtredItems = items.filter(({ done }) => filter(done));
     return (
         !!filtredItems.length

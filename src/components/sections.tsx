@@ -6,7 +6,9 @@ import { NoteContext } from "../context/noteProvider"
 
 
 function Sections() {
-    const { load } = React.useContext(NoteContext);
+
+    const connect = React.useContext(NoteContext);
+    const load = connect("load");
 
     const [fetchedItems, loading, error] = useFetch<EndpointList>(ENDPOINT.LIST, []);
     React.useEffect(() => {
