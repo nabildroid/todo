@@ -1,0 +1,62 @@
+#app section .items .item {
+	@apply mx-auto max-w-sm  my-4 border-4 border-gray-200 rounded-md shadow;
+}
+
+#app .item .title {
+	@apply flex items-center my-2 p-2 pb-0;
+}
+#app .item .title span {
+	@apply text-xl text-gray-600 mr-2;
+}
+#app .item .title h2 {
+	@apply text-lg text-gray-900;
+}
+
+#app .item > p {
+	@apply text-sm text-gray-700 leading-relaxed mb-4 max-w-xs mx-auto p-2;
+}
+
+#app .item .action {
+	@apply bg-gray-200 flex items-end p-2 justify-between;
+}
+#app .item .action li {
+	@apply text-gray-700;
+	font-family: monospace;
+}
+#app .item .action li b {
+	@apply ml-2 text-blue-500;
+}
+
+#app .item .action .history button {
+	@apply text-xs px-2  border border-gray-400 rounded -ml-2;
+}
+
+#app .item .action .checkBox {
+	@apply px-2 rounded text-gray-600 flex items-center text-sm;
+}
+
+#app .item .action .checkBox:focus{
+	@apply outline-none;
+}
+
+#app .item .action .checkBox:focus div{
+	@apply outline-none bg-blue-300;
+}
+#app .item .action .checkBox > div {
+	@apply relative w-10 bg-gray-400 h-5 rounded-full mx-1;
+	box-shadow: inset 1px 1px 3px 0px #4a4a4a8a;
+	transition: 0.3s;
+}
+#app .item .action .checkBox > div span {
+	@apply absolute w-4 h-4 bg-gray-600 rounded-full;
+	top: 2px;
+	left: 4px;
+	transition: 0.1s;
+}
+#app .item .action .checkBox > div span.right {
+	@apply bg-blue-500;
+    transform: translateX(calc( 100% ));
+}
+#app .item .action .checkBox > span.active {
+	@apply text-blue-600;
+}

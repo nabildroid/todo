@@ -1,0 +1,59 @@
+#add {
+	@apply max-w-xl px-2 py-2 bg-white shadow-md rounded mx-auto mt-4 mb-16;
+	@apply flex flex-col justify-start;
+}
+
+#add #input {
+	@apply flex items-center justify-between overflow-hidden;
+}
+#add #input div {
+	@apply flex items-center rounded;
+	background-color: rgb(240, 240, 240);
+	flex-grow: 1;
+}
+#add #input div span {
+	@apply block text-2xl text-gray-500 px-2;
+}
+
+#add #input div input {
+	@apply bg-transparent text-lg text-gray-800 outline-none flex-1;
+}
+#add #input button {
+	@apply hidden;
+}
+
+@screen md {
+	#add {
+		@apply px-8 py-8;
+	}
+}
+
+@screen sm {
+	#add #input div {
+		flex-grow: inherit;
+	}
+	#add #input button {
+		@apply block;
+	}
+	#add > button {
+		@apply hidden;
+	}
+}
+#add button {
+	@apply bg-blue-500 text-white px-4 py-1 rounded-md;
+	transition: 0.3s;
+}
+#add > button {
+	@apply mt-2;
+}
+#add button.error {
+	background: rgb(206, 101, 101) !important;
+}
+#add button:hover {
+	@apply bg-blue-400;
+}
+#add textarea {
+	@apply rounded mt-2 p-2 text-gray-800 leading-tight outline-none resize-none;
+	background-color: rgb(240, 240, 240);
+	min-height: 120px;
+}
