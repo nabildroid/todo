@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { NoteContext } from "../context/noteProvider";
+import { NotesContext } from "../context/noteProvider";
 
 import Note from "./note";
 
@@ -13,8 +13,7 @@ type Props = {
 
 function Section({ name, filter }: Props) {
 
-    const connect = React.useContext(NoteContext);
-    const items = connect("items");
+    const {items} = React.useContext(NotesContext);
     const filtredItems = items.filter(({ done }) => filter(done));
     return (
         !!filtredItems.length

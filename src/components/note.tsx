@@ -39,4 +39,4 @@ const Note = ({ item }: Props) => {
         </div>
     )
 };
-export default Note;
+export default React.memo(Note);

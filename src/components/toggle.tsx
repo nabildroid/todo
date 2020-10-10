@@ -1,5 +1,5 @@
 import * as React from "react";
-import { NoteContext } from "../context/noteProvider";
+import { NotesActionsContext } from "../context/noteProvider";
 
 type Props = {
     id: number
@@ -11,9 +11,8 @@ const Toggle = ({ id, isDone }: Props) => {
     const [done, setDone] = React.useState<Boolean>(isDone);
     
 
-    const connect = React.useContext(NoteContext);
-    const update = connect("update");
-
+    const {update} = React.useContext(NotesActionsContext);
+    console.log(`rendering ${id}'s toggle`);
     return (
         <button className={"checkBox"} onClick={() => {
             setDone(!done);

@@ -1,18 +1,17 @@
 import * as React from "react";
-import { NoteContext } from "../context/noteProvider";
+import { NotesActionsContext } from "../context/noteProvider";
 
 import "../style/add.less";
 
 
 function Add() {
 
-    const [title, setTitle] = React.useState("");
-    const [paragraph, setParagraph] = React.useState("");
+    const [title, setTitle] = React.useState("hello world");
+    const [paragraph, setParagraph] = React.useState("hello world");
     const [error, setError] = React.useState<boolean>(false);
 
-    const connect = React.useContext(NoteContext);
-    const add = connect("add");
-
+    const {add} = React.useContext(NotesActionsContext);
+    // console.log(add.name);
     console.log("#Rendering add new Note");
     const validate = () => {
         const isValide = title.trim().length > 1 && paragraph.trim().length > 1;

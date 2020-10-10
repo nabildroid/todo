@@ -1,6 +1,5 @@
 import * as React from "react";
 import { HashRouter as Router, Route, Link, } from "react-router-dom";
-import { NoteContext } from "./context/noteProvider";
 
 import Add from "./components/add";
 import AlertError from "./components/alertError";
@@ -9,10 +8,9 @@ const Sections = React.lazy(() =>
     import("./components/sections")
 );
 
+
 import "./style/app.less";
 function App() {
-    const connect = React.useContext(NoteContext);
-    const items = connect("items");
 
     console.log("------------------------------------");
     console.log("#Rending the app");

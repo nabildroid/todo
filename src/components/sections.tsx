@@ -2,13 +2,12 @@ import * as React from "react";
 import Section from "./section";
 import { useFetch } from "../hooks";
 import { ENDPOINT, EndpointList } from "../main";
-import { NoteContext } from "../context/noteProvider"
+import { NotesActionsContext } from "../context/noteProvider"
 
 
 function Sections() {
 
-    const connect = React.useContext(NoteContext);
-    const load = connect("load");
+    const {load} = React.useContext(NotesActionsContext);
 
     const [fetchedItems, loading, error] = useFetch<EndpointList>(ENDPOINT.LIST, []);
     React.useEffect(() => {

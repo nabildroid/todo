@@ -5,22 +5,24 @@ import { useFetch } from "../hooks";
 
 import { ENDPOINT, Item } from "../main";
 
-type ConnectTo = {
-    items: Item[],
+type NotesProvider = {
+    items: Item[]
+}
+type NotesActionsProvider = {
     add: (title: string, content: string) => void;
     update: (done: boolean, created: number) => void;
     load: (items: Item[]) => void;
     error: Error;
 }
 
-type Connect = <T extends keyof ConnectTo>  (to: T) => ConnectTo[T];
-export const NoteContext = React.createContext<Connect>(null);
+export const NotesContext = React.createContext<NotesProvider>(null);
+export const NotesActionsContext = React.createContext<NotesActionsProvider>(null);
 
 const NoteProvider = ({ children }) => {
 
     const [items, dispatch] = React.useReducer(reducer, []);
 
-    const add = (title: string, content: string) => {
+    const add = React.useCallback((title: string, content: string) => {
         dispatch({
             type: NoteActions.ADD,
             payload: {
@@ -35,9 +37,9 @@ const NoteProvider = ({ children }) => {
                 done: false
             }
         })
-    }
+    }, []);
 
-    const update = (done: boolean, created: number) => {
+    const update = React.useCallback((done: boolean, created: number) => {
         dispatch({
             type: NoteActions.UPDATE,
             payload: {
@@ -45,38 +47,32 @@ const NoteProvider = ({ children }) => {
                 done,
             }
         })
-    }
+    }, [dispatch])
 
-    const load = (items: Item[]) => {
+    const load = React.useCallback((items: Item[]) => {
         dispatch({
             type: NoteActions.LOAD,
             payload: items.map(e => ({ ...e, fetched: true }))
         })
-    }
+    }, [dispatch])
 
-    const subscribes = React.useRef<{
-        [key in keyof ConnectTo]: ((val: ConnectTo[key]) => void)[]
-    }>();
 
-    const connect: Connect = (to) => {
-        switch (to) {
-            case "items":
-                return React.useMemo(() => items, [items]);
-            case "add":
-                return React.useMemo(() => add, [add]);
-            case "load":
-                return React.useMemo(() => load, [load]);
-            case "update":
-                return React.useMemo(() => update, [update]);
-            case "error":
-                return React.useMemo(() => null, []);
-        }
-    };
+
+    const values1: NotesProvider = React.useMemo(() => ({ items }), [items]);
+    const values2: NotesActionsProvider = React.useMemo(() => ({
+        add,
+        load,
+        update,
+        error: null
+    }), [add, load, update])
+
 
     return (
-        <NoteContext.Provider value={connect}>
-            {children}
-        </NoteContext.Provider>
+        <NotesActionsContext.Provider value={values2}>
+            <NotesContext.Provider value={values1}>
+                {children}
+            </NotesContext.Provider>
+        </NotesActionsContext.Provider>
     )
 }
 
